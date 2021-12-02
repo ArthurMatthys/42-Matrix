@@ -12,15 +12,16 @@ impl<K, const M: usize, const N: usize> Matrix<K, M, N> {
     pub fn is_square(&self) -> bool {
         M == N
     }
-}
 
-impl<K, const M: usize, const N: usize> From<[[K; N]; M]> for Matrix<K, M, N> {
-    fn from(item: [[K; N]; M]) -> Self {
-        Matrix(item)
+    pub fn get(&self) -> &[[K; N]; M] {
+        &self.0
+    }
+    pub fn get_mut(&mut self) -> &mut [[K; N]; M] {
+        &mut self.0
     }
 }
 
-impl<K: fmt::Display, const M: usize, const N: usize> Matrix<K, M, N> {
+impl<K: fmt::Display, const M: usize, const N: usize> fmt::Display for Matrix<K, M, N> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         Ok(for i in 0..M {
             write!(f, "[ ")?;
@@ -33,6 +34,25 @@ impl<K: fmt::Display, const M: usize, const N: usize> Matrix<K, M, N> {
             }
             write!(f, " ]\n")?;
         })
+    }
+}
+
+impl<K, const M: usize, const N: usize> From<[[K; N]; M]> for Matrix<K, M, N> {
+    fn from(item: [[K; N]; M]) -> Self {
+        Matrix(item)
+    }
+}
+
+impl<K: std::cmp::PartialEq, const M: usize, const N: usize> PartialEq for Matrix<K, M, N> {
+    fn eq(&self, other: &Self) -> bool {
+        for i in 0..M {
+            for j in 0..N {
+                if self.0[i][j] != other.0[i][j] {
+                    return false;
+                }
+            }
+        }
+        true
     }
 }
 
