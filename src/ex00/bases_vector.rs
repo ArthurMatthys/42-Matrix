@@ -23,11 +23,11 @@ where
 
 impl<K, const N: usize> Mul<K> for Vector<K, N>
 where
-    K: Copy + Mul<Output = K>,
+    K: Clone + Mul<Output = K>,
 {
     type Output = Self;
     fn mul(self, coef: K) -> Self::Output {
-        Self(self.get().map(|v| v * coef))
+        Self(self.0.map(|v| v * coef.clone()))
     }
 }
 

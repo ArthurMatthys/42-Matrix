@@ -29,11 +29,11 @@ where
 }
 impl<K, const M: usize, const N: usize> Mul<K> for Matrix<K, M, N>
 where
-    K: Copy + Mul<Output = K>,
+    K: Clone + Mul<Output = K>,
 {
     type Output = Self;
     fn mul(self, coef: K) -> Self::Output {
-        Matrix(self.0.map(|vec1| vec1.map(|v| v * coef)))
+        Matrix(self.0.map(|vec1| vec1.map(|v| v * coef.clone())))
     }
 }
 
