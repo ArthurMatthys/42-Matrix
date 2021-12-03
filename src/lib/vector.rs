@@ -1,5 +1,6 @@
 use std::fmt;
 
+#[derive(Clone)]
 pub struct Vector<K, const N: usize>(pub(crate) [K; N]);
 
 impl<K, const N: usize> Vector<K, N> {

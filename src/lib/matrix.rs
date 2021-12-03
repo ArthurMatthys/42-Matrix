@@ -1,5 +1,6 @@
 use std::fmt;
 
+#[derive(Clone)]
 pub struct Matrix<K, const M: usize, const N: usize>(pub(crate) [[K; N]; M]);
 
 impl<K, const M: usize, const N: usize> Matrix<K, M, N> {
