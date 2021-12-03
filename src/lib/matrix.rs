@@ -1,8 +1,11 @@
 use std::fmt;
 
-pub struct Matrix<K, const M: usize, const N: usize>([[K; N]; M]);
+pub struct Matrix<K, const M: usize, const N: usize>(pub(crate) [[K; N]; M]);
 
 impl<K, const M: usize, const N: usize> Matrix<K, M, N> {
+    pub fn new(matrix: [[K; N]; M]) -> Self {
+        Self(matrix)
+    }
     /// Return the shape of the given Matrix
     pub fn shape(&self) -> (usize, usize) {
         (M, N)

@@ -1,8 +1,11 @@
 use std::fmt;
 
-pub struct Vector<K, const N: usize>([K; N]);
+pub struct Vector<K, const N: usize>(pub(crate) [K; N]);
 
 impl<K, const N: usize> Vector<K, N> {
+    pub fn new(vector: [K; N]) -> Self {
+        Self(vector)
+    }
     pub fn size(&self) -> usize {
         N
     }
