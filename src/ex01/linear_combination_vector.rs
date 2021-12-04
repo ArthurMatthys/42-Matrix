@@ -1,14 +1,14 @@
-use crate::lib::vector::Vector;
 use std::ops::{Add, Mul};
 
-pub fn linear_combination<
-    K: Clone + Add<Output = K> + Mul<Output = K>,
-    const N: usize,
-    const B: usize,
->(
-    vecs: [Vector<K, N>; B],
-    coefs: [K; B],
-) -> Vector<K, N> {
+use crate::lib::{scalar::Scalar, vector::Vector};
+
+fn linear_combination<S, const N: usize, const B: usize>(
+    vecs: [Vector<S, N>; B],
+    coefs: [S; B],
+) -> Vector<S, N>
+where
+    S: Scalar + Add<Output = S> + Mul<Output = S>,
+{
     let mut iter = std::array::IntoIter::new(vecs.zip(coefs).map(|(v, k)| v * k));
     let first = iter
         .next()

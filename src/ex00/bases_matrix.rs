@@ -1,12 +1,12 @@
-use crate::lib::matrix::Matrix;
+use crate::lib::{matrix::Matrix, scalar::Scalar};
 use std::ops::{Add, Mul, Sub};
 
-impl<K, const M: usize, const N: usize> Add for Matrix<K, M, N>
+impl<S, const M: usize, const N: usize> Add for Matrix<S, M, N>
 where
-    K: Add<Output = K>,
+    S: Scalar + Add<Output = S>,
 {
     type Output = Self;
-    fn add(self, other: Matrix<K, M, N>) -> Self::Output {
+    fn add(self, other: Matrix<S, M, N>) -> Self::Output {
         Matrix(
             self.0
                 .zip(other.0)
@@ -14,12 +14,12 @@ where
         )
     }
 }
-impl<K, const M: usize, const N: usize> Sub for Matrix<K, M, N>
+impl<S, const M: usize, const N: usize> Sub for Matrix<S, M, N>
 where
-    K: Sub<Output = K>,
+    S: Scalar + Sub<Output = S>,
 {
     type Output = Self;
-    fn sub(self, other: Matrix<K, M, N>) -> Self::Output {
+    fn sub(self, other: Matrix<S, M, N>) -> Self::Output {
         Matrix(
             self.0
                 .zip(other.0)
@@ -27,12 +27,12 @@ where
         )
     }
 }
-impl<K, const M: usize, const N: usize> Mul<K> for Matrix<K, M, N>
+impl<S, const M: usize, const N: usize> Mul<S> for Matrix<S, M, N>
 where
-    K: Clone + Mul<Output = K>,
+    S: Scalar + Mul<Output = S>,
 {
     type Output = Self;
-    fn mul(self, coef: K) -> Self::Output {
+    fn mul(self, coef: S) -> Self::Output {
         Matrix(self.0.map(|vec1| vec1.map(|v| v * coef.clone())))
     }
 }

@@ -1,9 +1,11 @@
 use std::ops::{Add, Mul, Sub};
 
-pub fn lerp<V: Clone + Add<Output = V> + Mul<K, Output = V> + Sub<Output = V>, K>(
+use crate::lib::scalar::Scalar;
+
+pub fn lerp<V: Clone + Add<Output = V> + Mul<S, Output = V> + Sub<Output = V>, S: Scalar>(
     u: V,
     v: V,
-    t: K,
+    t: S,
 ) -> V {
     u.clone() + (v - u.clone()) * t
 }

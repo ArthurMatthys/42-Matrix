@@ -1,9 +1,9 @@
-use crate::lib::vector::Vector;
+use crate::lib::{scalar::Scalar, vector::Vector};
 use std::ops::{Add, Mul, Sub};
 
-impl<K, const N: usize> Add for Vector<K, N>
+impl<S, const N: usize> Add for Vector<S, N>
 where
-    K: Add<Output = K>,
+    S: Scalar + Add<Output = S>,
 {
     type Output = Self;
     fn add(self, other: Self) -> Self::Output {
@@ -11,9 +11,9 @@ where
     }
 }
 
-impl<K, const N: usize> Sub for Vector<K, N>
+impl<S, const N: usize> Sub for Vector<S, N>
 where
-    K: Sub<Output = K>,
+    S: Scalar + Sub<Output = S>,
 {
     type Output = Self;
     fn sub(self, other: Self) -> Self::Output {
@@ -21,12 +21,12 @@ where
     }
 }
 
-impl<K, const N: usize> Mul<K> for Vector<K, N>
+impl<S, const N: usize> Mul<S> for Vector<S, N>
 where
-    K: Clone + Mul<Output = K>,
+    S: Scalar + Mul<Output = S>,
 {
     type Output = Self;
-    fn mul(self, coef: K) -> Self::Output {
+    fn mul(self, coef: S) -> Self::Output {
         Self(self.0.map(|v| v * coef.clone()))
     }
 }

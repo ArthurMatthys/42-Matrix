@@ -1,15 +1,14 @@
-use crate::lib::matrix::Matrix;
 use std::ops::{Add, Mul};
 
-fn linear_combination<
-    K: Clone + Add<Output = K> + Mul<Output = K>,
-    const M: usize,
-    const N: usize,
-    const B: usize,
->(
-    matrices: [Matrix<K, M, N>; B],
-    coefs: [K; B],
-) -> Matrix<K, M, N> {
+use crate::lib::{matrix::Matrix, scalar::Scalar};
+
+fn linear_combination<S, const M: usize, const N: usize, const B: usize>(
+    matrices: [Matrix<S, M, N>; B],
+    coefs: [S; B],
+) -> Matrix<S, M, N>
+where
+    S: Scalar + Add<Output = S> + Mul<Output = S>,
+{
     let mut iter = std::array::IntoIter::new(matrices.zip(coefs).map(|(m, k)| m * k));
     let first = iter
         .next()
