@@ -6,7 +6,7 @@ impl<S, const N: usize> Vector<S, N>
 where
     S: Scalar + Add<Output = S> + Mul<Output = S>,
 {
-    fn dot(self, other: Self) -> S {
+    pub fn dot(self, other: Self) -> S {
         let mut iter = std::array::IntoIter::new(self.0.zip(other.0).map(|(v1, v2)| v1 * v2));
         let first = iter.next().expect("Your vector should not be empty");
         iter.fold(first, |acc, next| acc + next)

@@ -6,7 +6,7 @@ impl<S, const N: usize> Vector<S, N>
 where
     S: Scalar + Add<Output = S>,
 {
-    fn norm_1(self) -> f32 {
+    pub fn norm_1(self) -> f32 {
         let mut iter = std::array::IntoIter::new(self.0);
         let first = iter
             .next()
@@ -18,7 +18,7 @@ impl<S, const N: usize> Vector<S, N>
 where
     S: Scalar + Add<Output = S> + Mul<Output = S>,
 {
-    fn norm(self) -> f32 {
+    pub fn norm(self) -> f32 {
         let mut iter = std::array::IntoIter::new(self.0.map(|v| v.norm().powf(2.)));
         let first = iter
             .next()
@@ -30,7 +30,7 @@ impl<S, const N: usize> Vector<S, N>
 where
     S: Scalar,
 {
-    fn norm_inf(self) -> f32 {
+    pub fn norm_inf(self) -> f32 {
         let mut iter = std::array::IntoIter::new(self.0.map(|v| v.norm()));
         let mut max = iter
             .next()
