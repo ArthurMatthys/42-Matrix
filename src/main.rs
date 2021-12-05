@@ -1,4 +1,5 @@
 #![feature(array_zip)]
+#![feature(maybe_uninit_array_assume_init)]
 mod lib;
 
 mod ex00;
