@@ -1,6 +1,6 @@
 use std::ops::{Add, Div, Mul, Sub};
 
-pub trait Scalar: Add + Sub + Mul + Div + Clone + PartialOrd {
+pub trait Scalar: Add + Sub + Mul + Div + Clone + PartialOrd + PartialEq {
     fn norm(self) -> f32;
 }
 
