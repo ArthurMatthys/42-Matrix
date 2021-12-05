@@ -1,10 +1,16 @@
-use std::fmt;
+use std::{fmt, mem::MaybeUninit};
+
+use super::scalar::Scalar;
 
 #[derive(Clone)]
-pub struct Matrix<K, const M: usize, const N: usize>(pub(crate) [[K; N]; M]);
+pub struct Matrix<S, const M: usize, const N: usize>(pub(crate) [[S; N]; M]);
 
-impl<K, const M: usize, const N: usize> Matrix<K, M, N> {
-    pub fn new(matrix: [[K; N]; M]) -> Self {
+impl<S, const M: usize, const N: usize> Matrix<S, M, N>
+where
+    S: Scalar,
+    MaybeUninit<S>: Copy,
+{
+    pub fn new(matrix: [[S; N]; M]) -> Self {
         Self(matrix)
     }
     /// Return the shape of the given Matrix
@@ -16,16 +22,9 @@ impl<K, const M: usize, const N: usize> Matrix<K, M, N> {
     pub fn is_square(&self) -> bool {
         M == N
     }
-
-    pub fn get(&self) -> &[[K; N]; M] {
-        &self.0
-    }
-    pub fn get_mut(&mut self) -> &mut [[K; N]; M] {
-        &mut self.0
-    }
 }
 
-impl<K: fmt::Display, const M: usize, const N: usize> fmt::Display for Matrix<K, M, N> {
+impl<S: fmt::Display, const M: usize, const N: usize> fmt::Display for Matrix<S, M, N> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         Ok(for i in 0..M {
             write!(f, "[ ")?;
@@ -41,13 +40,16 @@ impl<K: fmt::Display, const M: usize, const N: usize> fmt::Display for Matrix<K,
     }
 }
 
-impl<K, const M: usize, const N: usize> From<[[K; N]; M]> for Matrix<K, M, N> {
-    fn from(item: [[K; N]; M]) -> Self {
+impl<S, const M: usize, const N: usize> From<[[S; N]; M]> for Matrix<S, M, N> {
+    fn from(item: [[S; N]; M]) -> Self {
         Matrix(item)
     }
 }
 
-impl<K: std::cmp::PartialEq, const M: usize, const N: usize> PartialEq for Matrix<K, M, N> {
+impl<S, const M: usize, const N: usize> PartialEq for Matrix<S, M, N>
+where
+    S: Scalar,
+{
     fn eq(&self, other: &Self) -> bool {
         for i in 0..M {
             for j in 0..N {
