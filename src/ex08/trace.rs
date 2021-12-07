@@ -8,9 +8,8 @@ where
 {
     pub fn trace(self) -> S {
         let mut iter = std::array::IntoIter::new(self.0);
-        let first = iter.next().expect("But contain at leat one line")[0].clone();
-        iter.enumerate()
-            .fold(first, |acc, (i, v)| acc + v[i + 1].clone())
+        let first = iter.next().expect("But contain at leat one line")[0];
+        iter.enumerate().fold(first, |acc, (i, v)| acc + v[i + 1])
     }
 }
 

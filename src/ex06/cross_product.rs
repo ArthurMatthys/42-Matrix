@@ -7,9 +7,9 @@ where
     S: Scalar + Mul<Output = S> + Sub<Output = S> + Add<Output = S>,
 {
     Vector([
-        u.0[1].clone() * v.0[2].clone() - u.0[2].clone() * v.0[1].clone(),
-        u.0[2].clone() * v.0[0].clone() - u.0[0].clone() * v.0[2].clone(),
-        u.0[0].clone() * v.0[1].clone() - u.0[1].clone() * v.0[0].clone(),
+        u.0[1] * v.0[2] - u.0[2] * v.0[1],
+        u.0[2] * v.0[0] - u.0[0] * v.0[2],
+        u.0[0] * v.0[1] - u.0[1] * v.0[0],
     ])
 }
 

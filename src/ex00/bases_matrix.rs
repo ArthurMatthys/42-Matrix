@@ -33,7 +33,7 @@ where
 {
     type Output = Self;
     fn mul(self, coef: S) -> Self::Output {
-        Matrix(self.0.map(|vec1| vec1.map(|v| v * coef.clone())))
+        Matrix(self.0.map(|vec1| vec1.map(|v| v * coef)))
     }
 }
 

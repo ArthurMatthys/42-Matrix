@@ -27,7 +27,7 @@ where
 {
     type Output = Self;
     fn mul(self, coef: S) -> Self::Output {
-        Self(self.0.map(|v| v * coef.clone()))
+        Self(self.0.map(|v| v * coef))
     }
 }
 
