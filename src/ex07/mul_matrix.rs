@@ -1,7 +1,4 @@
-use std::{
-    mem::MaybeUninit,
-    ops::{Add, Mul},
-};
+use std::ops::{Add, Mul};
 
 use crate::lib::{matrix::Matrix, scalar::Scalar, vector::Vector};
 
@@ -18,7 +15,7 @@ where
 impl<S, const M: usize, const N: usize, const P: usize> Mul<Matrix<S, N, P>> for Matrix<S, M, N>
 where
     S: Scalar + Mul<Output = S> + Add<Output = S>,
-    MaybeUninit<S>: Copy,
+    [S; N]: Copy,
 {
     type Output = Matrix<S, M, P>;
     fn mul(self, rhs: Matrix<S, N, P>) -> Self::Output {

@@ -1,20 +1,17 @@
-use std::mem::MaybeUninit;
-
 use crate::lib::{matrix::Matrix, scalar::Scalar};
 
 impl<S, const M: usize, const N: usize> Matrix<S, M, N>
 where
     S: Scalar,
-    MaybeUninit<S>: Copy,
 {
     pub fn transpose(&self) -> Matrix<S, N, M> {
-        let mut tmp = [[MaybeUninit::<S>::uninit(); M]; N];
+        let mut res = [[<S as Scalar>::zero(); M]; N];
         for j in 0..N {
             for i in 0..M {
-                tmp[j][i].write(self.0[i][j].clone());
+                res[j][i] = self.0[i][j];
             }
         }
-        unsafe { Matrix(tmp.map(|v| MaybeUninit::array_assume_init(v))) }
+        Matrix(res)
     }
 }
 
