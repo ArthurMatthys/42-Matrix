@@ -55,7 +55,6 @@ where
                 continue;
             }
         }
-
         Matrix(res)
     }
 }

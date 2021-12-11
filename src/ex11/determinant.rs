@@ -6,13 +6,6 @@ pub fn vec_determinant<S>(v: Vec<Vec<S>>, size: usize) -> S
 where
     S: Scalar + Sub<Output = S> + Mul<Output = S> + Add<Output = S>,
 {
-    for i in 0..size {
-        print!("|");
-        for j in 0..size {
-            print!("{}, ", v[i][j]);
-        }
-        println!("|");
-    }
     if size == 1 {
         return v[0][0];
     } else if size == 2 {
@@ -38,7 +31,6 @@ where
                     } else {
                         sub_matrix[i - 1][j] = v[i][j];
                     }
-                    // res = res + (-1).pow(col + 1) * det;
                 }
             }
             if col % 2 == 1 {
@@ -47,7 +39,6 @@ where
                 res = res + v[0][col] * vec_determinant(sub_matrix.clone(), size - 1);
             }
         }
-        println!("{}", res);
         return res;
     }
 }
