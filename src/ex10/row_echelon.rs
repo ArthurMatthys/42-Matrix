@@ -6,7 +6,7 @@ impl<S, const M: usize, const N: usize> Matrix<S, M, N>
 where
     S: Scalar + Div<Output = S> + Sub<Output = S> + Mul<Output = S>,
 {
-    fn row_echelon(self) -> Self {
+    pub fn row_echelon(self) -> Self {
         let mut res = [[<S as Scalar>::zero(); N]; M];
         let swap_lines = |res: &mut [[S; N]; M], l1: usize, l2: usize| {
             for j in 0..N {
