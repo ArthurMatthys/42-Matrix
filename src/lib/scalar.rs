@@ -3,7 +3,7 @@ use std::{
     ops::{Add, Div, Mul, Sub},
 };
 
-pub trait Scalar: Add + Sub + Mul + Div + PartialOrd + PartialEq + Copy + Display {
+pub trait Scalar: Add + Sub + Mul + Div + PartialEq + Copy + Display {
     fn norm(self) -> f32;
     fn zero() -> Self;
     fn one() -> Self;
