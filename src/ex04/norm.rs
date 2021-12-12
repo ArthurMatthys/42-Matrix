@@ -113,6 +113,7 @@ mod tests {
         let u = Vector([-1., -2.]);
         assert!(u.norm() == 2.236067977);
     }
+    #[test]
     fn test_norm_03() {
         let u = Vector([0.]);
         assert!(u.norm() == 0.);
