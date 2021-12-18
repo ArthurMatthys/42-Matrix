@@ -22,44 +22,44 @@ mod tests {
 
     #[test]
     fn test_linear_combination_00() {
-        let e1 = Vector::from([1., 0., 0.]);
-        let e2 = Vector::from([0., 1., 0.]);
-        let e3 = Vector::from([0., 0., 1.]);
+        let e1 = Vector([1., 0., 0.]);
+        let e2 = Vector([0., 1., 0.]);
+        let e3 = Vector([0., 0., 1.]);
         let coefs = [10., -2., 0.5];
-        let result = Vector::from([10., -2., 0.5]);
+        let result = Vector([10., -2., 0.5]);
         assert!(linear_combination([e1, e2, e3], coefs) == result);
     }
     #[test]
     fn test_linear_combination_01() {
-        let e1 = Vector::from([-42., 42.]);
+        let e1 = Vector([-42., 42.]);
         let coefs = [-1.];
-        let result = Vector::from([42., -42.]);
+        let result = Vector([42., -42.]);
         assert!(linear_combination([e1], coefs) == result);
     }
     #[test]
     fn test_linear_combination_02() {
-        let e1 = Vector::from([-42.]);
-        let e2 = Vector::from([-42.]);
-        let e3 = Vector::from([-42.]);
+        let e1 = Vector([-42.]);
+        let e2 = Vector([-42.]);
+        let e3 = Vector([-42.]);
         let coefs = [-1., 1., 0.];
-        let result = Vector::from([0.]);
+        let result = Vector([0.]);
         assert!(linear_combination([e1, e2, e3], coefs) == result);
     }
     #[test]
     fn test_linear_combination_03() {
-        let e1 = Vector::from([-42., 42.]);
-        let e2 = Vector::from([1., 3.]);
-        let e3 = Vector::from([10., 20.]);
+        let e1 = Vector([-42., 42.]);
+        let e2 = Vector([1., 3.]);
+        let e3 = Vector([10., 20.]);
         let coefs = [1., -10., -1.];
-        let result = Vector::from([-62., -8.]);
+        let result = Vector([-62., -8.]);
         assert!(linear_combination([e1, e2, e3], coefs) == result);
     }
     #[test]
     fn test_linear_combination_04() {
-        let e1 = Vector::from([-42., 100., -69.5]);
-        let e2 = Vector::from([1., 3., 5.]);
+        let e1 = Vector([-42., 100., -69.5]);
+        let e2 = Vector([1., 3., 5.]);
         let coefs = [1., -10.];
-        let result = Vector::from([-52., 70., -119.5]);
+        let result = Vector([-52., 70., -119.5]);
         assert!(linear_combination([e1, e2], coefs) == result);
     }
 }

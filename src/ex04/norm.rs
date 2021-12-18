@@ -46,6 +46,8 @@ where
 
 #[cfg(test)]
 mod tests {
+    use crate::lib::complex::Complex;
+
     use super::*;
 
     #[test]
@@ -197,5 +199,35 @@ mod tests {
     fn test_norm_inf_09() {
         let u = Vector([-4., -2.]);
         assert!(u.norm_inf() == 4.);
+    }
+    #[test]
+    fn test_norm_1_complex_00() {
+        let u = Vector([Complex(-4., 3.), Complex(6., 8.)]);
+        assert!(u.norm_1() == 15.);
+    }
+    #[test]
+    fn test_norm_1_complex_01() {
+        let u = Vector([Complex(-4., 0.), Complex(-3., -4.)]);
+        assert!(u.norm_1() == 9.);
+    }
+    #[test]
+    fn test_norm_complex_00() {
+        let u = Vector([Complex(-4., 3.), Complex(6., -8.)]);
+        assert!(u.norm() == 11.18034);
+    }
+    #[test]
+    fn test_norm_complex_01() {
+        let u = Vector([Complex(-4., 0.), Complex(-3., -4.)]);
+        assert!(u.norm() == 6.4031243);
+    }
+    #[test]
+    fn test_norm_inf_complex_00() {
+        let u = Vector([Complex(-4., 0.), Complex(0., -3.)]);
+        assert!(u.norm_inf() == 4.);
+    }
+    #[test]
+    fn test_norm_inf_complex_01() {
+        let u = Vector([Complex(-4., 0.), Complex(-3., -4.)]);
+        assert!(u.norm_inf() == 5.);
     }
 }

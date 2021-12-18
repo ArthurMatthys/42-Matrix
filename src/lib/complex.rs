@@ -6,7 +6,7 @@ use std::{
 use super::scalar::Scalar;
 
 #[derive(Clone, Copy)]
-pub struct Complex<S>(S, S);
+pub struct Complex<S>(pub(crate) S, pub(crate) S);
 
 impl<S> Add for Complex<S>
 where
@@ -56,7 +56,7 @@ where
     S: Scalar + fmt::Display,
 {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        Ok(write!(f, "{} {}i", self.0, self.1.norm())?)
+        Ok(write!(f, "{} {}i", self.0, self.1)?)
     }
 }
 impl<S> PartialEq for Complex<S>
@@ -73,7 +73,7 @@ where
     S: Scalar + Div<Output = S> + Add<Output = S> + Sub<Output = S> + Mul<Output = S>,
 {
     fn norm(self) -> f32 {
-        self.0.norm() + self.1.norm()
+        (self.0.norm().powf(2.) + self.1.norm().powf(2.)).sqrt()
     }
     fn one() -> Complex<S> {
         Complex(<S as Scalar>::one(), <S as Scalar>::zero())

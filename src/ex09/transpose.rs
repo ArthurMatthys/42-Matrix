@@ -21,38 +21,38 @@ mod test {
 
     #[test]
     fn test_transpose_00() {
-        let m = Matrix::from([[0., 0.], [0., 0.]]);
-        let res = Matrix::from([[0., 0.], [0., 0.]]);
+        let m = Matrix([[0., 0.], [0., 0.]]);
+        let res = Matrix([[0., 0.], [0., 0.]]);
         assert!(m.transpose() == res);
     }
     #[test]
     fn test_transpose_01() {
-        let m = Matrix::from([[1., 0.], [0., 1.]]);
-        let res = Matrix::from([[1., 0.], [0., 1.]]);
+        let m = Matrix([[1., 0.], [0., 1.]]);
+        let res = Matrix([[1., 0.], [0., 1.]]);
         assert!(m.transpose() == res);
     }
     #[test]
     fn test_transpose_02() {
-        let m = Matrix::from([[1., 2.], [3., 4.]]);
-        let res = Matrix::from([[1., 3.], [2., 4.]]);
+        let m = Matrix([[1., 2.], [3., 4.]]);
+        let res = Matrix([[1., 3.], [2., 4.]]);
         assert!(m.transpose() == res);
     }
     #[test]
     fn test_transpose_03() {
-        let m = Matrix::from([[1., 0., 0.], [0., 1., 0.], [0., 0., 1.]]);
-        let res = Matrix::from([[1., 0., 0.], [0., 1., 0.], [0., 0., 1.]]);
+        let m = Matrix([[1., 0., 0.], [0., 1., 0.], [0., 0., 1.]]);
+        let res = Matrix([[1., 0., 0.], [0., 1., 0.], [0., 0., 1.]]);
         assert!(m.transpose() == res);
     }
     #[test]
     fn test_transpose_04() {
-        let m = Matrix::from([[1., 2.], [3., 4.], [5., 6.]]);
-        let res = Matrix::from([[1., 3., 5.], [2., 4., 6.]]);
+        let m = Matrix([[1., 2.], [3., 4.], [5., 6.]]);
+        let res = Matrix([[1., 3., 5.], [2., 4., 6.]]);
         assert!(m.transpose() == res);
     }
     #[test]
     fn test_transpose_05() {
-        let m = Matrix::from([[1., 3., 5.], [2., 4., 6.]]);
-        let res = Matrix::from([[1., 2.], [3., 4.], [5., 6.]]);
+        let m = Matrix([[1., 3., 5.], [2., 4., 6.]]);
+        let res = Matrix([[1., 2.], [3., 4.], [5., 6.]]);
         assert!(m.transpose() == res);
     }
 }
