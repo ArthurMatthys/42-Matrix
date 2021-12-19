@@ -61,6 +61,8 @@ where
 
 #[cfg(test)]
 mod tests {
+    use crate::lib::complex::Complex;
+
     use super::*;
 
     #[test]
@@ -130,6 +132,38 @@ mod tests {
             [1., 0., 0., -2., -59.],
             [0., 1., 0., 4., 98.53334],
             [0., 0., 1., 0., -3.6666667],
+        ]);
+        assert!(u.row_echelon() == res);
+    }
+    #[test]
+    fn test_row_echelon_complex_00() {
+        let u = Matrix([
+            [Complex(-42., 2.), Complex(42., -30.)],
+            [Complex(420., 210.), Complex(-420., -210.)],
+        ]);
+        let res = Matrix([
+            [Complex(1., 0.), Complex(0., 0.)],
+            [Complex(0., 0.), Complex(1., 0.)],
+        ]);
+        assert!(u.row_echelon() == res);
+    }
+    #[test]
+    fn test_row_echelon_complex_01() {
+        let u = Matrix([
+            [Complex(1., 2.), Complex(2., 1.), Complex(3., -4.)],
+            [Complex(-4., 3.), Complex(-7., -4.), Complex(-9., -5.)],
+        ]);
+        let res = Matrix([
+            [
+                Complex(1., 0.),
+                Complex(0., 0.),
+                Complex(-1.8161765, -0.11029422),
+            ],
+            [
+                Complex(0., 0.),
+                Complex(1., 0.),
+                Complex(1.7867646, -1.0220587),
+            ],
         ]);
         assert!(u.row_echelon() == res);
     }
