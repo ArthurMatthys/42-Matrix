@@ -15,8 +15,6 @@ mod ex10;
 mod ex11;
 mod ex12;
 mod ex13;
-mod ex14;
-mod ex15;
 
 pub fn main() {
     return;

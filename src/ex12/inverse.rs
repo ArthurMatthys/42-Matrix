@@ -53,7 +53,6 @@ where
                     swap_lines(&mut res, actual_line, line);
                 }
                 let coef_line = cpy_matrix[actual_line][col].clone();
-                println!("coef : {}", coef_line);
                 div_column(&mut cpy_matrix, actual_line, coef_line);
                 div_column(&mut res, actual_line, coef_line);
                 for i in 0..M {
