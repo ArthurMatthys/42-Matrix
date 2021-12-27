@@ -7,9 +7,9 @@ where
     S: Scalar + Sub<Output = S> + Mul<Output = S> + Add<Output = S>,
 {
     if size == 1 {
-        return v[0][0];
+        v[0][0]
     } else if size == 2 {
-        return v[0][0] * v[1][1] - v[0][1] * v[1][0];
+        v[0][0] * v[1][1] - v[0][1] * v[1][0]
     } else {
         let mut sub_matrix: Vec<Vec<S>> = vec![];
         for _ in 0..size - 1 {
@@ -39,7 +39,7 @@ where
                 res = res + v[0][col] * vec_determinant(sub_matrix.clone(), size - 1);
             }
         }
-        return res;
+        res
     }
 }
 
@@ -56,7 +56,7 @@ where
             }
             sub_matrix.push(line);
         }
-        return vec_determinant(sub_matrix, M);
+        vec_determinant(sub_matrix, M)
     }
 }
 

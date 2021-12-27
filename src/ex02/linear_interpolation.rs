@@ -7,7 +7,7 @@ pub fn lerp<V: Clone + Add<Output = V> + Mul<S, Output = V> + Sub<Output = V>, S
     v: V,
     t: S,
 ) -> V {
-    u.clone() + (v - u.clone()) * t
+    u.clone() + (v - u) * t
 }
 
 #[cfg(test)]

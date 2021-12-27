@@ -6,7 +6,7 @@ fn angle_cos<S, const N: usize>(v1: Vector<S, N>, v2: Vector<S, N>) -> f32
 where
     S: Scalar + Add<Output = S> + Mul<Output = S> + Div<f32, Output = f32>,
 {
-    v1.clone().dot(v2.clone()) / (v1.clone().norm() * v2.clone().norm())
+    v1.clone().dot(v2.clone()) / (v1.norm() * v2.norm())
 }
 
 #[cfg(test)]

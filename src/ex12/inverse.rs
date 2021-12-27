@@ -14,7 +14,7 @@ where
         let mut res = [[<S as Scalar>::zero(); M]; M];
         let swap_lines = |matrix: &mut [[S; M]; M], l1: usize, l2: usize| {
             for j in 0..M {
-                let tmp = matrix[l1][j].clone();
+                let tmp = matrix[l1][j];
                 matrix[l1][j] = matrix[l2][j];
                 matrix[l2][j] = tmp;
             }
@@ -25,7 +25,7 @@ where
                     return Some(i);
                 }
             }
-            return None;
+            None
         };
         let add_columns = |matrix: &mut [[S; M]; M], l1: usize, l2: usize, coef: S| {
             for j in 0..M {
@@ -39,7 +39,7 @@ where
         };
         for i in 0..M {
             for j in 0..M {
-                cpy_matrix[i][j] = self.0[i][j].clone();
+                cpy_matrix[i][j] = self.0[i][j];
                 if i == j {
                     res[i][j] = <S as Scalar>::one();
                 }
@@ -52,14 +52,14 @@ where
                     swap_lines(&mut cpy_matrix, actual_line, line);
                     swap_lines(&mut res, actual_line, line);
                 }
-                let coef_line = cpy_matrix[actual_line][col].clone();
+                let coef_line = cpy_matrix[actual_line][col];
                 div_column(&mut cpy_matrix, actual_line, coef_line);
                 div_column(&mut res, actual_line, coef_line);
                 for i in 0..M {
                     if i == actual_line {
                         continue;
                     }
-                    let pivot = cpy_matrix[i][col].clone();
+                    let pivot = cpy_matrix[i][col];
                     add_columns(&mut cpy_matrix, actual_line, i, pivot);
                     add_columns(&mut res, actual_line, i, pivot);
                 }

@@ -20,12 +20,10 @@ where
     type Output = Matrix<S, M, P>;
     fn mul(self, rhs: Matrix<S, N, P>) -> Self::Output {
         let transpose = rhs.transpose();
-        Matrix(self.0.map(|v1| {
-            transpose
-                .clone()
-                .0
-                .map(|v2| Vector(v1.clone()).dot(Vector(v2.clone())))
-        }))
+        Matrix(
+            self.0
+                .map(|v1| transpose.clone().0.map(|v2| Vector(v1).dot(Vector(v2)))),
+        )
     }
 }
 

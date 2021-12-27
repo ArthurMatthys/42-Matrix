@@ -6,9 +6,9 @@ where
 {
     pub fn transpose(&self) -> Matrix<S, N, M> {
         let mut res = [[<S as Scalar>::zero(); M]; N];
-        for j in 0..N {
-            for i in 0..M {
-                res[j][i] = self.0[i][j];
+        for (j, vec) in res.iter_mut().enumerate() {
+            for (i, v) in vec.iter_mut().enumerate() {
+                *v = self.0[i][j];
             }
         }
         Matrix(res)

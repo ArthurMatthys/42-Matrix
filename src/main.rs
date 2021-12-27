@@ -16,6 +16,4 @@ mod ex11;
 mod ex12;
 mod ex13;
 
-pub fn main() {
-    return;
-}
+pub fn main() {}

@@ -10,7 +10,7 @@ where
         let mut res = [[<S as Scalar>::zero(); N]; M];
         let swap_lines = |res: &mut [[S; N]; M], l1: usize, l2: usize| {
             for j in 0..N {
-                let tmp = res[l1][j].clone();
+                let tmp = res[l1][j];
                 res[l1][j] = res[l2][j];
                 res[l2][j] = tmp;
             }
@@ -21,14 +21,14 @@ where
                     return Some(i);
                 }
             }
-            return None;
+            None
         };
         if M == 0 || N == 0 {
             panic!("Must contain at least one column and one line");
         }
         for i in 0..M {
             for j in 0..N {
-                res[i][j] = self.0[i][j].clone();
+                res[i][j] = self.0[i][j];
             }
         }
         let mut actual_line = 0;
@@ -37,7 +37,7 @@ where
                 if line != actual_line {
                     swap_lines(&mut res, actual_line, line);
                 }
-                let pivot = res[actual_line][col].clone();
+                let pivot = res[actual_line][col];
                 for j in col..N {
                     res[actual_line][j] = res[actual_line][j] / pivot;
                 }
@@ -45,7 +45,7 @@ where
                     if i == actual_line {
                         continue;
                     }
-                    let pivot = res[i][col].clone();
+                    let pivot = res[i][col];
                     for j in col..N {
                         res[i][j] = res[i][j] - pivot * res[actual_line][j];
                     }
