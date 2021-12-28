@@ -2,7 +2,7 @@ use std::ops::{Add, Mul, Sub};
 
 use crate::lib::{matrix::Matrix, scalar::Scalar};
 
-pub fn vec_determinant<S>(v: Vec<Vec<S>>, size: usize) -> S
+pub fn _vec_determinant<S>(v: Vec<Vec<S>>, size: usize) -> S
 where
     S: Scalar + Sub<Output = S> + Mul<Output = S> + Add<Output = S>,
 {
@@ -34,9 +34,9 @@ where
                 }
             }
             if col % 2 == 1 {
-                res = res - v[0][col] * vec_determinant(sub_matrix.clone(), size - 1);
+                res = res - v[0][col] * _vec_determinant(sub_matrix.clone(), size - 1);
             } else {
-                res = res + v[0][col] * vec_determinant(sub_matrix.clone(), size - 1);
+                res = res + v[0][col] * _vec_determinant(sub_matrix.clone(), size - 1);
             }
         }
         res
@@ -47,7 +47,7 @@ impl<S, const M: usize> Matrix<S, M, M>
 where
     S: Scalar + Sub<Output = S> + Mul<Output = S> + Add<Output = S>,
 {
-    pub fn determinant(self) -> S {
+    pub fn _determinant(self) -> S {
         let mut sub_matrix = vec![];
         for i in 0..M {
             let mut line: Vec<S> = vec![];
@@ -56,7 +56,7 @@ where
             }
             sub_matrix.push(line);
         }
-        vec_determinant(sub_matrix, M)
+        _vec_determinant(sub_matrix, M)
     }
 }
 
@@ -68,67 +68,67 @@ pub mod tests {
     fn test_determinant_00() {
         let u = Matrix([[1., -1.], [-1., 1.]]);
         let res = 0.;
-        assert!(u.determinant() == res);
+        assert!(u._determinant() == res);
     }
     #[test]
     fn test_determinant_01() {
         let u = Matrix([[1.]]);
         let res = 1.;
-        assert!(u.determinant() == res);
+        assert!(u._determinant() == res);
     }
     #[test]
     fn test_determinant_02() {
         let u = Matrix([[0., 0.], [0., 0.]]);
         let res = 0.;
-        assert!(u.determinant() == res);
+        assert!(u._determinant() == res);
     }
     #[test]
     fn test_determinant_03() {
         let u = Matrix([[1., 0.], [0., 1.]]);
         let res = 1.;
-        assert!(u.determinant() == res);
+        assert!(u._determinant() == res);
     }
     #[test]
     fn test_determinant_04() {
         let u = Matrix([[2., 0.], [0., 2.]]);
         let res = 4.;
-        assert!(u.determinant() == res);
+        assert!(u._determinant() == res);
     }
     #[test]
     fn test_determinant_05() {
         let u = Matrix([[1., 1.], [1., 1.]]);
         let res = 0.;
-        assert!(u.determinant() == res);
+        assert!(u._determinant() == res);
     }
     #[test]
     fn test_determinant_06() {
         let u = Matrix([[0., 1.], [1., 0.]]);
         let res = -1.;
-        assert!(u.determinant() == res);
+        assert!(u._determinant() == res);
     }
     #[test]
     fn test_determinant_07() {
         let u = Matrix([[1., 2.], [3., 4.]]);
         let res = -2.;
-        assert!(u.determinant() == res);
+        assert!(u._determinant() == res);
     }
     #[test]
     fn test_determinant_08() {
         let u = Matrix([[-7., 5.], [4., 6.]]);
         let res = -62.;
-        assert!(u.determinant() == res);
+        assert!(u._determinant() == res);
     }
     #[test]
     fn test_determinant_09() {
         let u = Matrix([[2., 0., 0.], [0., 2., 0.], [0., 0., 2.]]);
         let res = 8.;
-        assert!(u.determinant() == res);
+        assert!(u._determinant() == res);
     }
     #[test]
     fn test_determinant_10() {
         let u = Matrix([[8., 5., -2.], [4., 7., 20.], [7., 6., 1.]]);
         let res = -174.;
-        assert!(u.determinant() == res);
+        assert!(u._determinant() == res);
     }
     #[test]
     fn test_determinant_11() {
@@ -139,6 +139,6 @@ pub mod tests {
             [28., -4., 17., 1.],
         ]);
         let res = 1032.;
-        assert!(u.determinant() == res);
+        assert!(u._determinant() == res);
     }
 }

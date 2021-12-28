@@ -6,8 +6,8 @@ impl<S, const M: usize> Matrix<S, M, M>
 where
     S: Scalar + Div<Output = S> + Sub<Output = S> + Mul<Output = S> + Add<Output = S>,
 {
-    pub fn inverse(self) -> Result<Self, String> {
-        if self.clone().determinant().is_zero() {
+    pub fn _inverse(self) -> Result<Self, String> {
+        if self.clone()._determinant().is_zero() {
             return Err("Determinant is null. No inverse for this matrix".to_string());
         }
         let mut cpy_matrix = [[<S as Scalar>::zero(); M]; M];
@@ -20,8 +20,8 @@ where
             }
         };
         let find_first_row = |matrix: [[S; M]; M], line: usize, col: usize| {
-            for i in line..M {
-                if !matrix[i][col].is_zero() {
+            for (i, vec) in matrix.iter().enumerate().skip(line) {
+                if !vec[col].is_zero() {
                     return Some(i);
                 }
             }
@@ -80,13 +80,13 @@ mod tests {
     fn test_inverse_00() {
         let u = Matrix([[1., 0., 0.], [0., 1., 0.], [0., 0., 1.]]);
         let res = Matrix([[1., 0., 0.], [0., 1., 0.], [0., 0., 1.]]);
-        assert!(u.inverse() == Ok(res));
+        assert!(u._inverse() == Ok(res));
     }
     #[test]
     fn test_inverse_01() {
         let u = Matrix([[2., 0., 0.], [0., 2., 0.], [0., 0., 2.]]);
         let res = Matrix([[0.5, 0., 0.], [0., 0.5, 0.], [0., 0., 0.5]]);
-        assert!(u.inverse() == Ok(res));
+        assert!(u._inverse() == Ok(res));
     }
     #[test]
     fn test_inverse_02() {
@@ -96,35 +96,35 @@ mod tests {
             [-0.7816092, -0.12643678, 0.9655172],
             [0.14367816, 0.07471265, -0.20689656],
         ]);
-        assert!(u.inverse() == Ok(res));
+        assert!(u._inverse() == Ok(res));
     }
     #[test]
     fn test_inverse_03() {
         let u = Matrix([[1., 0.], [0., 1.]]);
         let res = Matrix([[1., 0.], [0., 1.]]);
-        assert!(u.inverse() == Ok(res));
+        assert!(u._inverse() == Ok(res));
     }
     #[test]
     fn test_inverse_04() {
         let u = Matrix([[2., 0.], [0., 2.]]);
         let res = Matrix([[0.5, 0.], [0., 0.5]]);
-        assert!(u.inverse() == Ok(res));
+        assert!(u._inverse() == Ok(res));
     }
     #[test]
     fn test_inverse_05() {
         let u = Matrix([[0.5, 0.], [0., 0.5]]);
         let res = Matrix([[2., 0.], [0., 2.]]);
-        assert!(u.inverse() == Ok(res));
+        assert!(u._inverse() == Ok(res));
     }
     #[test]
     fn test_inverse_06() {
         let u = Matrix([[1., 2.], [3., 4.]]);
         let res = Matrix([[-2., 1.], [1.5, -0.5]]);
-        assert!(u.inverse() == Ok(res));
+        assert!(u._inverse() == Ok(res));
     }
     #[test]
     fn test_inverse_07() {
         let u = Matrix([[1., 2.], [4., 8.]]);
-        assert!(u.inverse().is_err());
+        assert!(u._inverse().is_err());
     }
 }

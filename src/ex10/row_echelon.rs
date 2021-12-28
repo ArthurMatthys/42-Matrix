@@ -6,7 +6,7 @@ impl<S, const M: usize, const N: usize> Matrix<S, M, N>
 where
     S: Scalar + Div<Output = S> + Sub<Output = S> + Mul<Output = S>,
 {
-    pub fn row_echelon(self) -> Self {
+    pub fn _row_echelon(self) -> Self {
         let mut res = [[<S as Scalar>::zero(); N]; M];
         let swap_lines = |res: &mut [[S; N]; M], l1: usize, l2: usize| {
             for j in 0..N {
@@ -16,8 +16,8 @@ where
             }
         };
         let find_first_row = |res: [[S; N]; M], line: usize, col: usize| {
-            for i in line..M {
-                if !res[i][col].is_zero() {
+            for (i, vec) in res.iter().enumerate().skip(line) {
+                if !vec[col].is_zero() {
                     return Some(i);
                 }
             }
@@ -26,9 +26,9 @@ where
         if M == 0 || N == 0 {
             panic!("Must contain at least one column and one line");
         }
-        for i in 0..M {
-            for j in 0..N {
-                res[i][j] = self.0[i][j];
+        for (i, vec) in res.iter_mut().enumerate() {
+            for (j, v) in vec.iter_mut().enumerate() {
+                *v = self.0[i][j];
             }
         }
         let mut actual_line = 0;
@@ -69,13 +69,13 @@ mod tests {
     fn test_row_echelon_00() {
         let u = Matrix([[1., 0., 0.], [0., 1., 0.], [0., 0., 1.]]);
         let res = Matrix([[1., 0., 0.], [0., 1., 0.], [0., 0., 1.]]);
-        assert!(u.row_echelon() == res);
+        assert!(u._row_echelon() == res);
     }
     #[test]
     fn test_row_echelon_01() {
         let u = Matrix([[1., 2.], [3., 4.]]);
         let res = Matrix([[1., 0.], [0., 1.]]);
-        assert!(u.row_echelon() == res);
+        assert!(u._row_echelon() == res);
     }
     #[test]
     fn test_row_echelon_02() {
@@ -89,37 +89,37 @@ mod tests {
             [0., 0., 1., 0., -3.6666667],
             [0., 0., 0., 1., 29.5],
         ]);
-        assert!(u.row_echelon() == res);
+        assert!(u._row_echelon() == res);
     }
     #[test]
     fn test_row_echelon_03() {
         let u = Matrix([[0., 0.], [0., 0.]]);
         let res = Matrix([[0., 0.], [0., 0.]]);
-        assert!(u.row_echelon() == res);
+        assert!(u._row_echelon() == res);
     }
     #[test]
     fn test_row_echelon_04() {
         let u = Matrix([[1., 0.], [0., 1.]]);
         let res = Matrix([[1., 0.], [0., 1.]]);
-        assert!(u.row_echelon() == res);
+        assert!(u._row_echelon() == res);
     }
     #[test]
     fn test_row_echelon_05() {
         let u = Matrix([[4., 2.], [2., 1.]]);
         let res = Matrix([[1., 0.5], [0., 0.]]);
-        assert!(u.row_echelon() == res);
+        assert!(u._row_echelon() == res);
     }
     #[test]
     fn test_row_echelon_06() {
         let u = Matrix([[-7., 2.], [4., 8.]]);
         let res = Matrix([[1., 0.], [0., 1.]]);
-        assert!(u.row_echelon() == res);
+        assert!(u._row_echelon() == res);
     }
     #[test]
     fn test_row_echelon_07() {
         let u = Matrix([[1., 2.], [4., 8.]]);
         let res = Matrix([[1., 2.], [0., 0.]]);
-        assert!(u.row_echelon() == res);
+        assert!(u._row_echelon() == res);
     }
     #[test]
     fn test_row_echelon_08() {
@@ -133,7 +133,7 @@ mod tests {
             [0., 1., 0., 4., 98.53334],
             [0., 0., 1., 0., -3.6666667],
         ]);
-        assert!(u.row_echelon() == res);
+        assert!(u._row_echelon() == res);
     }
     #[test]
     fn test_row_echelon_complex_00() {
@@ -145,7 +145,7 @@ mod tests {
             [Complex(1., 0.), Complex(0., 0.)],
             [Complex(0., 0.), Complex(1., 0.)],
         ]);
-        assert!(u.row_echelon() == res);
+        assert!(u._row_echelon() == res);
     }
     #[test]
     fn test_row_echelon_complex_01() {
@@ -165,6 +165,6 @@ mod tests {
                 Complex(1.7867646, -1.0220587),
             ],
         ]);
-        assert!(u.row_echelon() == res);
+        assert!(u._row_echelon() == res);
     }
 }

@@ -2,14 +2,14 @@ use std::ops::{Add, Mul};
 
 use crate::lib::{matrix::Matrix, scalar::Scalar};
 
-fn linear_combination<S, const M: usize, const N: usize, const B: usize>(
+fn _linear_combination<S, const M: usize, const N: usize, const B: usize>(
     matrices: [Matrix<S, M, N>; B],
     coefs: [S; B],
 ) -> Matrix<S, M, N>
 where
     S: Scalar + Add<Output = S> + Mul<Output = S>,
 {
-    let mut iter = std::array::IntoIter::new(matrices.zip(coefs).map(|(m, k)| m * k));
+    let mut iter = matrices.zip(coefs).map(|(m, k)| m * k).into_iter();
     let first = iter
         .next()
         .expect("You need to have more than one element to do a linear combination");
@@ -27,7 +27,7 @@ mod tests {
         let e1 = Matrix([[-42., 42.]]);
         let coefs = [-1.];
         let result = Matrix([[42., -42.]]);
-        assert!(linear_combination([e1], coefs) == result);
+        assert!(_linear_combination([e1], coefs) == result);
     }
     #[test]
     fn test_linear_combination_01() {
@@ -36,7 +36,7 @@ mod tests {
         let e3 = Matrix([[-42.]]);
         let coefs = [-1., 1., 0.];
         let result = Matrix([[0.]]);
-        assert!(linear_combination([e1, e2, e3], coefs) == result);
+        assert!(_linear_combination([e1, e2, e3], coefs) == result);
     }
     #[test]
     fn test_linear_combination_02() {
@@ -45,7 +45,7 @@ mod tests {
         let e3 = Matrix([[10., 20.], [30., 40.]]);
         let coefs = [1., -10., -1.];
         let result = Matrix([[-62., -8.], [370., -500.]]);
-        assert!(linear_combination([e1, e2, e3], coefs) == result);
+        assert!(_linear_combination([e1, e2, e3], coefs) == result);
     }
     #[test]
     fn test_linear_combination_03() {
@@ -62,7 +62,7 @@ mod tests {
             [Complex(-5., 7.), Complex(-5., 11.)],
             [Complex(-5., 9.), Complex(-5., 13.)],
         ]);
-        assert!(linear_combination([e1, e2], coefs) == result);
+        assert!(_linear_combination([e1, e2], coefs) == result);
     }
     #[test]
     fn test_linear_combination_04() {
@@ -83,7 +83,7 @@ mod tests {
             [Complex(-6., 42.), Complex(-6., 34.)],
             [Complex(-6., 38.), Complex(-6., 30.)],
         ]);
-        assert!(linear_combination([e1, e2, e3], coefs) == result);
+        assert!(_linear_combination([e1, e2, e3], coefs) == result);
     }
     #[test]
     fn test_linear_combination_05() {
@@ -104,6 +104,6 @@ mod tests {
             [Complex(462., 862.), Complex(-1050., -582.)],
             [Complex(210., -10920.), Complex(-210., 10920.)],
         ]);
-        assert!(linear_combination([e1, e2, e3], coefs) == result);
+        assert!(_linear_combination([e1, e2, e3], coefs) == result);
     }
 }
