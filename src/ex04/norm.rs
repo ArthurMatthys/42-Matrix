@@ -1,6 +1,6 @@
 use std::ops::{Add, Mul};
 
-use crate::lib::{scalar::Scalar, vector::Vector};
+use crate::model::{scalar::Scalar, vector::Vector};
 
 impl<S, const N: usize> Vector<S, N>
 where
@@ -46,7 +46,7 @@ where
 
 #[cfg(test)]
 mod tests {
-    use crate::lib::complex::Complex;
+    use crate::model::complex::Complex;
 
     use super::*;
 

@@ -1,6 +1,6 @@
 use std::ops::{Add, Div, Mul};
 
-use crate::lib::{scalar::Scalar, vector::Vector};
+use crate::model::{scalar::Scalar, vector::Vector};
 
 fn _angle_cos<S, const N: usize>(v1: Vector<S, N>, v2: Vector<S, N>) -> f32
 where

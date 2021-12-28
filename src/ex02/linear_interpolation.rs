@@ -1,6 +1,6 @@
 use std::ops::{Add, Mul, Sub};
 
-use crate::lib::scalar::Scalar;
+use crate::model::scalar::Scalar;
 
 pub fn _lerp<V: Clone + Add<Output = V> + Mul<S, Output = V> + Sub<Output = V>, S: Scalar>(
     u: V,
@@ -13,9 +13,9 @@ pub fn _lerp<V: Clone + Add<Output = V> + Mul<S, Output = V> + Sub<Output = V>, 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::lib::complex::Complex;
-    use crate::lib::matrix::Matrix;
-    use crate::lib::vector::Vector;
+    use crate::model::complex::Complex;
+    use crate::model::matrix::Matrix;
+    use crate::model::vector::Vector;
 
     #[test]
     fn test_lerp_scalar_00() {

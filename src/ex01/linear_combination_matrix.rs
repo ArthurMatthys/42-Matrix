@@ -1,6 +1,6 @@
 use std::ops::{Add, Mul};
 
-use crate::lib::{matrix::Matrix, scalar::Scalar};
+use crate::model::{matrix::Matrix, scalar::Scalar};
 
 fn _linear_combination<S, const M: usize, const N: usize, const B: usize>(
     matrices: [Matrix<S, M, N>; B],
@@ -18,7 +18,7 @@ where
 
 #[cfg(test)]
 mod tests {
-    use crate::lib::complex::Complex;
+    use crate::model::complex::Complex;
 
     use super::*;
 

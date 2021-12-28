@@ -1,6 +1,6 @@
 use std::ops::Add;
 
-use crate::lib::{matrix::Matrix, scalar::Scalar};
+use crate::model::{matrix::Matrix, scalar::Scalar};
 
 impl<S, const M: usize> Matrix<S, M, M>
 where

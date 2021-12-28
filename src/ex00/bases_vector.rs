@@ -1,4 +1,4 @@
-use crate::lib::{scalar::Scalar, vector::Vector};
+use crate::model::{scalar::Scalar, vector::Vector};
 use std::ops::{Add, Mul, Sub};
 
 impl<S, const N: usize> Add for Vector<S, N>
@@ -33,7 +33,8 @@ where
 
 #[cfg(test)]
 mod tests {
-    use crate::lib::{complex::Complex, vector::Vector};
+    use super::*;
+    use crate::model::complex::Complex;
 
     #[test]
     fn test_add_0() {

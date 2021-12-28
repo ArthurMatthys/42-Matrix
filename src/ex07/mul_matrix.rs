@@ -1,6 +1,6 @@
 use std::ops::{Add, Mul};
 
-use crate::lib::{matrix::Matrix, scalar::Scalar, vector::Vector};
+use crate::model::{matrix::Matrix, scalar::Scalar, vector::Vector};
 
 impl<S, const M: usize, const N: usize> Mul<Vector<S, N>> for Matrix<S, M, N>
 where

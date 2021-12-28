@@ -1,6 +1,6 @@
 use std::ops::{Add, Mul};
 
-use crate::lib::{scalar::Scalar, vector::Vector};
+use crate::model::{scalar::Scalar, vector::Vector};
 
 fn _linear_combination<S, const N: usize, const B: usize>(
     vecs: [Vector<S, N>; B],

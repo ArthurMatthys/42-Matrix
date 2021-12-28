@@ -1,6 +1,6 @@
 use std::ops::{Div, Mul, Sub};
 
-use crate::lib::{matrix::Matrix, scalar::Scalar};
+use crate::model::{matrix::Matrix, scalar::Scalar};
 
 impl<S, const M: usize, const N: usize> Matrix<S, M, N>
 where
@@ -61,7 +61,7 @@ where
 
 #[cfg(test)]
 mod tests {
-    use crate::lib::complex::Complex;
+    use crate::model::complex::Complex;
 
     use super::*;
 

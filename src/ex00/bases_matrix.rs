@@ -1,4 +1,4 @@
-use crate::lib::{matrix::Matrix, scalar::Scalar};
+use crate::model::{matrix::Matrix, scalar::Scalar};
 use std::ops::{Add, Mul, Sub};
 
 impl<S, const M: usize, const N: usize> Add for Matrix<S, M, N>
@@ -39,7 +39,7 @@ where
 
 #[cfg(test)]
 mod tests {
-    use crate::lib::matrix::Matrix;
+    use super::*;
 
     #[test]
     fn test_add_0() {

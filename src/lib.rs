@@ -1,5 +1,5 @@
 #![feature(array_zip)]
-mod lib;
+mod model;
 
 mod ex00;
 mod ex01;
@@ -15,5 +15,3 @@ mod ex10;
 mod ex11;
 mod ex12;
 mod ex13;
-
-pub fn main() {}

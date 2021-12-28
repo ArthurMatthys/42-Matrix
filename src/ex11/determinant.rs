@@ -1,6 +1,6 @@
 use std::ops::{Add, Mul, Sub};
 
-use crate::lib::{matrix::Matrix, scalar::Scalar};
+use crate::model::{matrix::Matrix, scalar::Scalar};
 
 pub fn _vec_determinant<S>(v: Vec<Vec<S>>, size: usize) -> S
 where

@@ -1,6 +1,6 @@
 use std::ops::{Add, Mul, Sub};
 
-use crate::lib::{scalar::Scalar, vector::Vector};
+use crate::model::{scalar::Scalar, vector::Vector};
 
 pub fn _cross_product<S>(u: Vector<S, 3>, v: Vector<S, 3>) -> Vector<S, 3>
 where
